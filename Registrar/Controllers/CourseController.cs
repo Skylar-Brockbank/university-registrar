@@ -82,5 +82,6 @@ namespace Registrar.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    
   }
 }

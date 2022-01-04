@@ -12,7 +12,7 @@ else{
 @foreach(Course course in Model)
 {
   <li>@Html.ActionLink($"{course.Name}", "Details",  new { id = course.CourseId})</li>
-  }
+}
 </ul>
 }
 <p>@Html.ActionLink("Add new course", "Create")</p>
