@@ -13,10 +13,30 @@ else
   <ul>
   @foreach(var join in Model.JoinEntities)
   {
-    <li>join.Student.Name</li>
+    <li>@join.Student.Name</li>
   }
   </ul>
   
 }
+@using(Html.BeginForm())
+{
+  @Html.Hidden("CourseId",Model.CourseId)
+  @Html.Label("Add a student to this course")
+  @Html.DropDownList("StudentIds")
+  <input type="submit" value="Yeet said student into class">
+}
+
+<ul>
+  @foreach(var join in Model.JoinEntities)
+  {
+    <li>@join.Student.Name</li>
+    @using (Html.BeginForm("Delete", "Course"))
+    {
+      @Html.Hidden("joinId", @join.CourseStudentId)
+      <input type="submit" value="Delete" />
+    }
+  }
+</ul>
+
 
 <p>@Html.ActionLink("Back to Courses", "Index")</p>

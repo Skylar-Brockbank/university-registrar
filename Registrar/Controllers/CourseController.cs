@@ -54,11 +54,33 @@ namespace Registrar.Controllers
     }
     public ActionResult Details(int id)
     {
+      ViewBag.StudentIds = new SelectList(_db.Students, "StudentId", "Name");
       Course Target = _db.Courses
         .Include(c => c.JoinEntities)
         .ThenInclude(join => join.Student)
         .FirstOrDefault(c => c.CourseId == id);
       return View(Target);
+    }
+    [HttpPost]
+    public ActionResult Details(int CourseId,int StudentIds)
+    {
+      _db.CourseStudents.Add(new CourseStudent() {CourseId = CourseId, StudentId = StudentIds});
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+    
+    public ActionResult Delete(int id)
+    {
+      var thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
+      return View(thisCourse);
+    }
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int JoinId)
+    {
+      var thisRelationship = _db.CourseStudents.FirstOrDefault(cs => cs.CourseStudentId == JoinId);
+      _db.CourseStudents.Remove(thisRelationship);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
