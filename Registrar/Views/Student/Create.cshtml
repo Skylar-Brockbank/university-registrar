@@ -1,0 +1,10 @@
+@model Registrar.Models.Student;
+
+@using(Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => Model.Name, new {@required = "required"})
+  @Html.LabelFor(model => model.EnrollmentDate)
+  @Html.TextBoxFor(model => model.EnrollmentDate, "{0:mm/dd/yy}")
+  <input type="submit" value="Enroll"/>
+}

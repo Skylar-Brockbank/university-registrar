@@ -1,0 +1,14 @@
+@using System.Collections.Generic;
+@using Registrar.Models;
+
+@if(Model.Count > 0){
+  foreach(Student s in Model){
+    <li>@s.Name</li>
+  }
+}else{
+  <p>"Hey! there's nobody here! Go home, cherish your family... do something"</p>
+}
+
+@Html.ActionLink("Add Students", "Create", "Student")
+@Html.ActionLink("ET Phone Home", "Index", "Home")
+@Html.ActionLink("KILL THEM ALL!", "RazeItToTheGround", "Student")
